@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>起步</title>
+</head>
+<body>
+<div id="app">
+<!-- 文本插值 -->
+  {{message}}
+<!-- 另一种绑定DOM元素属性 -->
+<span v-bind:title="msg">
+    鼠标悬停几秒之后查看此处动态绑定的提示信息！
+</span>
+
+<!-- 条件与循环 -->
+<p v-if="seen">现在你看到我了</p>
+
+<!--  渲染数据列表-->
+<ol>
+    <li v-for="todo in todos">
+        {{todo.text}}
+    </li>
+</ol>
+
+<!-- 处理用户输入 -->
+<p>{{txt}}</p>
+<button v-on:click="reverseTxt">逆转消息</button>
+
+<!-- 实现双向绑定 -->
+<p>{{text}}</p>
+<input type="text" v-model="text">
+</div>
+ <script src="js/vue.js"></script> 
+ <script>
+ // 扩展Vue构造器，从而用预定义选项创建可复用的组件构造器
+ var MyComponent = Vue.extend({
+    //扩展选项
+ });
+ //所有的  `MyComponent`实例都将以预定义的扩展选项被创建
+ var myComponentInstance = new MyComponent();
+ // 创建一个Vue的根实例
+    var app = new Vue({
+        el: '#app',
+        // 定义数据
+        // 每个Vue实例都会代理data对象里所有的属性
+        //即是：app.msg会修改data.msg里面的值
+        //注意：只有这些被代理的属性是响应的。如果在实例创建之后添加新的属性到实例上，它不会触发视图更新。
+        data : {
+          message : 'Hello Vue!',
+          msg : '页面加载与' + new Date(),
+          seen : false,
+          todos : [
+            {text : '学习javascript'},
+            {text : '学习angular'},
+            {text : '学习vue'}
+          ],
+          txt : 'hello vue.js',
+          text :'hello Vue'
+        },
+        // 定义方法
+        methods : {
+          reverseTxt : function(){
+              this.txt = this.txt.split('').reverse().join('');
+          }
+        }
+    })
+    app.todos.push({text:'新项目'})
+ </script>
+</body>
+</html>

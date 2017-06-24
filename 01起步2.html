@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue创建实例</title>
+</head>
+<body>
+  <div id="app"></div>
+ <script src="js/vue.js"></script> 
+ <script>
+    var data = {a : 1};
+    var vm = new Vue({
+        el : '#app',
+        data : data
+    });
+    // Vue 实例暴露了一些有用的实例属性与方法
+    console.log(vm.$data === data);//true
+    console.log(vm.$el === document.getElementById('app'));//true
+    //$watch是一个实例方法
+    vm.$watch('a', function(newVal, oldVal){
+      //这个回调将在`vm.a`改变之后调用
+      alert(1)
+
+    })
+    vm.a = 3;
+ </script>
+</body>
+</html>

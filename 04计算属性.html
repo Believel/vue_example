@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>计算属性</title>
+</head>
+<body>
+  <div id="app">
+      <p>Original message:"{{message}}"</p>
+      <p>Computed reversed message:"{{reversedMessage}}"</p>
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+      var vm = new Vue({
+          el : '#app',
+          data : {
+              message : 'hello'
+          },
+          // 计算属性
+          // 计算属性默认只有getter
+          computed : {
+            // a computed getter
+              reversedMessage : function(){
+                  return this.message.split('').reverse().join('');
+              }
+          },
+          // 观察和响应 Vue 实例上的数据变动
+          watch : {
+
+          }
+      });
+      console.log(vm.reversedMessage);
+      vm.message = 'google';
+      console.log(vm.reversedMessage);
+  </script>
+</body>
+</html>

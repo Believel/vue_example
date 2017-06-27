@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>单向数据流</title>
+</head>
+<body>
+  <div id="app">
+      
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+  // 对于修改prop中数据的冲动？通常的两种原因：
+  // 1、prop作为初始值传入后， 子组件想把它当作局部数据来用
+     Vue.component('test', {
+        props : ['initialCounter'],
+        data : function(){
+            return {
+                counter : this.initialCounter
+            }
+        }
+     })
+      var vm = new Vue({
+          el : '#app',
+          data : {
+
+          },
+          methods : {
+            
+          }
+      })
+  </script>
+</body>
+</html>

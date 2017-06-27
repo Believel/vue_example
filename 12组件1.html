@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>组件初始</title>
+</head>
+<body>
+  <div id="app">
+  <!-- 要确保在初始化根实例 之前 注册了组件： -->
+      <my-component></my-component>
+      <my-item></my-item>
+      <ul>  
+        <li is="simple-counter"></li>
+        <li is="simple-counter"></li>
+        <li is="simple-counter"></li>
+      </ul>
+      <h1>修改之后</h1>
+      <ul>
+        <li is="simple-counter1"></li>
+        <li is="simple-counter1"></li>
+        <li is="simple-counter1"></li>
+      </ul>
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+  // 注册一个全局的组件，使用Vue.component(tagName, options);
+  var data = {count : 0};
+  Vue.component('simple-counter', {
+      template : '<button @click="count +=1">{{count}}</button>',
+      //技术上data的确是一个函数了，因此Vue不会警告
+      //但是我们返回给每个组件的实例的却引用了同一个data对象
+      data : function(){
+         return data
+      }
+  })
+// 修改方案
+   Vue.component('simple-counter1', {
+      template : '<button @click="count +=1">{{count}}</button>',
+      data : function(){
+         return {
+              count : 0
+         }
+      }
+  })
+  Vue.component('my-component', {
+      //选项
+      template : '<div>A custom component</div>',
+      //组件中 data必须是一个函数
+      data : function(){
+            return {
+
+            }
+      }
+     
+  })
+  //局部注册
+  var child = {
+      template : '<div>A custom component</div>'
+  }
+      var vm = new Vue({
+          el : '#app',
+          data : {
+
+          },
+          methods : {
+            
+          },
+          components : {
+            'my-item' : child
+          }
+      })
+  </script>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>模板语法</title>
+</head>
+<body>
+  <div id="app">
+  <h1>文本</h1>
+      <!-- 双大括号 -->
+      <!-- 双大括号会将数据解释为纯文本，而非HTML -->
+      <span>message: {{msg}}</span>
+      <br>
+      <!-- 一次绑定 -->
+      <span v-once>This will never change: {{ msg }}</span>
+      <!-- 纯HTML -->
+      <!-- 不安全，容易导致XSS（跨站脚本）攻击 -->
+      <div v-html="rawHTML"></div>
+  <h1>属性</h1>
+       <div v-bind:id="dynamicId"></div>
+       <!-- 如果条件变量值是false的话该属性将会移除掉 -->
+       <button v-bind:disabled="someDynamicCondition">Button</button>
+  <h1>使用javascript表达式</h1>
+  <!-- 有个限制就是，每个绑定都只能包含 "单个表达式" -->
+      <div v-bind:id="'list-' + id"></div>
+
+  <h1>指令</h1>
+      <!-- 指令的职责就是 ：当其表达式的值改变时相应地将某些行为应用到 DOM 上 -->
+      <p v-if="seen">Now you see me</p>
+      <!-- 一些指令能接收一些参数，如v-bind -->
+      <a v-bind:href="url">home</a>
+      <!-- v-on :用来监听DOM事件    click是监听的事件名字   clickMe是监听的事件对象触发的函数-->
+      <a v-on:click="clickMe">click me</a>
+
+      <!--修饰符 -->
+      <!-- .prevent 修饰符告诉 v-on 指令对于触发的事件调用 event.preventDefault()： -->
+      <form v-on:submit.prevent="onSubmit"></form>
+
+      <!-- 过滤器 -->
+      {{ message | capitalize }}
+      <!--过滤器可以串联：  {{ message | filterA | filterB }} -->
+      <!-- 过滤器可以接受参数：{{ message | filterA('arg1', arg2) }} ，在这里字符串 'arg1' 将传给过滤器作为第二个参数， arg2 表达式的值将被求值然后传给过滤器作为第三个参数。 -->
+
+
+    <h1>缩写</h1>
+      <!-- v-bind缩写 -->
+      <a v-bind:href="url">home</a>
+      <a :href="url">home</a>
+      <!-- v-on缩写 -->
+      <button v-on:submit="onSubmit">button</button>
+      <button @submit="onSubmit">button</button>
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+      var vm = new Vue({
+          el : '#app',
+          data : {
+              msg : 'vueJS',
+              rawHTML : '<p>哈哈哈</p>',
+              dynamicId:'wpt',
+              someDynamicCondition : true,
+              id : 1,
+              seen : true,
+              url : '#/home',
+              message : 'love'
+          },
+          methods : {
+            clickMe : function(){
+                console.log('clime me !')
+            },
+            onSubmit : function(){
+
+            }
+          },
+          filters : {
+            //第一个参数：value是表达式的值
+            capitalize : function(value){
+                if(!value){return ""}
+                  value = value.toString();
+                return value.charAt(0).toUpperCase() + value.slice(1);
+            }
+          }
+      })
+  </script>
+</body>
+</html>

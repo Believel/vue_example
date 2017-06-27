@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>表单控件绑定</title>
+</head>
+<body>
+  <div id="app">
+     <!-- 文本框 -->
+      <input v-model="message" placeholder="edit me">
+      <!-- 多行文本框 -->
+      <textarea  v-model="message"></textarea>
+      <!-- 复选框 -->
+      <input type="checkbox" v-model="check" id="checkbox">
+      <label for="checkbox">{{ check }}</label>
+      <p>Message is : {{message}}</p>
+
+  <!-- 多个复选框，绑定同一个数组 -->
+  <input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+  <label for="jack">Jack</label>
+  <input type="checkbox" id="john" value="John" v-model="checkedNames">
+  <label for="john">John</label>
+  <input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+  <label for="mike">Mike</label>
+  <br>
+  <span>Checked names: {{ checkedNames }}</span>
+
+  <!-- 单选按钮 -->
+  <br>
+  <h1>单选按钮 </h1>
+  <input type="radio" id="one" value="One" v-model="picked">
+  <label for="one">One</label>
+  <br>
+  <input type="radio" id="two" value="Two" v-model="picked">
+  <label for="two">Two</label>
+  <br>
+  <span>Picked: {{ picked }}</span>
+
+  <!-- 选择列表 -->
+  <br>
+  <h1>选择列表</h1>
+    <select v-model="selected">
+    <option disabled value="">请选择</option>
+    <option>A</option>
+    <option>B</option>
+    <option>C</option>
+  </select>
+  <span>Selected: {{ selected }}</span>
+  <!-- 多选列表（绑定到一个数组） -->
+  <br>
+  <h1>多选列表（绑定到一个数组）</h1>
+   <select v-model="selected1" multiple style="width: 50px">
+    <option>A</option>
+    <option>B</option>
+    <option>C</option>
+  </select>
+  <br>
+  <span>Selected: {{ selected1 }}</span>
+
+  <!--  动态选项，用 v-for 渲染： -->
+  <br>
+  <h1>动态选项，用 v-for 渲染：</h1>
+    <select v-model="selected2">
+      <option v-for="option in options" v-bind:value="option.value">
+        {{ option.text }}
+      </option>
+    </select>
+    <span>Selected: {{ selected }}</span>
+
+
+    <!-- 绑定value -->
+    <input type="text">
+    <!-- 修饰符 -->
+    <br>
+    <h1>修饰符</h1>
+    <!-- 在"change"而不是input事件中更新 -->
+    <input v-model.lazy="msg">
+    {{msg}}
+    <!-- v-model.number -->
+    <!-- v-model.trim -->
+
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+      var vm = new Vue({
+          el : '#app',
+          data : {
+              message : 'vueJS',
+              check : true,
+              checkedNames : [],
+              picked :'',
+              selected :null,
+              selected1 : [],
+              //动态数据提供
+              selected2 : 'A',
+              options : [
+              { text: 'One', value: 'A' },
+              { text: 'Two', value: 'B' },
+              { text: 'Three', value: 'C' }]
+          },
+          methods : {
+            
+          }
+      })
+  </script>
+</body>
+</html>

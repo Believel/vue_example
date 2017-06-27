@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>条件渲染</title>
+</head>
+<body>
+  <div id="app">
+      <!-- 当 v-if 与 v-for 一起使用时，v-for 具有比 v-if 更高的优先级。 -->
+      <h1 v-if="ok">YES</h1>
+      <h1 v-else>NO</h1>
+
+      <h1 v-show="ok">YES</h1>
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+      var vm = new Vue({
+          el : '#app',
+          data : {
+            ok : true
+          },
+          methods : {
+            
+          }
+      })
+  </script>
+</body>
+</html>

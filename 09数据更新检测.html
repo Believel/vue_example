@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>数组更新检测</title>
+</head>
+<body>
+  <div id="app">
+      
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+  // 他们将触发视图更新
+  // push()
+  // pop()
+  // shift()
+  // unshift()
+  // splice()
+  // sort()
+  // reverse()
+      var vm = new Vue({
+          el : '#app',
+          data : {
+              items: ['a', 'b', 1]
+          },
+          methods : {
+            
+          }
+      })
+      // 由于 JavaScript 的限制， Vue 不能检测以下变动的数组：
+      // 当你利用索引直接设置一个项时，例如： vm.items[indexOfItem] = newValue
+      // 当你修改数组的长度时，例如： vm.items.length = newLength
+         // vm.items[3] = 'h';
+         // vm.items.length = 9;
+         // console.log(vm.items[3]);
+         // console.log(vm.item.length)
+    
+      // 
+      // 那么该怎么解决呢？
+      // 参数：1.数据值，2. 插入的索引值， 3.插入的值
+      Vue.set(vm.items, 3, 'h');
+      //或者
+      vm.items.splice(4, 1, 'g');
+      console.log(vm.items);
+
+      // 解决第二类问题
+      vm.items.splice(9);
+      console.log(vm.items.length)
+  </script>
+</body>
+</html>

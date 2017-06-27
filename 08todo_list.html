@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>todo_list例子</title>
+</head>
+<body>
+  <div id="app">
+      <input v-model="newTodoText" @keyup.enter="addNewTodo" placeholder="Add a todo">
+      <ul>  
+      <!-- 在有些情况下，组件也可以是原生HTML元素的形式，以is特性扩展 -->
+        <li is="todo-item" v-for="(todo, index) in todos" :title="todo" @remove="todos.splice(index, 1)" :key="todo[index]">
+          
+        </li>
+      </ul>
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+    Vue.component('todo-item', {
+        template :  `<li>{{title}}<button @click="$emit('remove')">X</button></li>`,
+        props : ['title']
+    })
+      var vm = new Vue({
+          el : '#app',
+          data : {
+            newTodoText : '',
+            todos : [
+              'Do the dishes',
+              'Take out the trash',
+              'Mow the lawn'
+            ]
+          },
+          methods : {
+            addNewTodo : function(){
+                this.todos.push(this.newTodoText);
+                this.newTodoText = ''
+            }
+          }
+      })
+  </script>
+</body>
+</html>

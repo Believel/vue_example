@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>构成组件</title>
+</head>
+<body>
+  <div id="app">
+  <!-- 此时message的值是传入的字符串 -->
+      <child message="hello!" my-message="hello!"></child>
+   <!-- 2、动态prop  使用v-bind绑定 -->    
+   <input v-model="parentMsg">
+      <br>
+      <child :my-child="parentMsg"></child>
+
+      <!-- 此时 `1`是字符串 -->
+      <comp num="1"></comp>
+      
+      <!-- 此时用v-bind之后，它的值被当作javascript表达式计算-->
+      <comp :num="1"></comp>
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+  // 在Vue.js中。父子组件的关系可以总结为props down,event up.父组件通过props向下传递数据给子组件，子组件通过events给父组件发送消息
+  // 组件实例的作用域是孤立的
+  Vue.component('child', {
+    //使用props传递数据
+    //声明props
+    props : ['message', 'myMessage', 'myChild'],
+    //就像data一样，prop可以在模板内
+    //同样也可以在vm实例中像“this.message”这样使用
+     template : '<span>{{message}}-{{myMessage}}-{{myChild}}</span>'
+  })
+
+
+  // 字面量语法vs动态语法
+  Vue.component('comp', {
+      props : ['num'],
+      template : '<span>{{num}}</span>'
+  })
+
+  
+      var vm = new Vue({
+          el : '#app',
+          data : {
+              parentMsg : '你好'
+          },
+          methods : {
+            
+          }
+      })
+  </script>
+</body>
+</html>

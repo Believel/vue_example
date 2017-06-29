@@ -6,24 +6,42 @@
 </head>
 <body>
   <div id="app">
-      
+      <test  :initial-counter ="counter" ></test>
+      <test1 :size="size"></test1>
   </div>
   <script src="js/vue.js"></script>
   <script>
   // 对于修改prop中数据的冲动？通常的两种原因：
-  // 1、prop作为初始值传入后， 子组件想把它当作局部数据来用
+  // 1、prop作为初始值传入后， 子组件想把它当作局部数据来用；
+  // 2、prop作为初始值传入，由子组件处理其它数据输出
+  // 对于这两周年那个原因，正确的应对方式是：
+  // 
+  // 定义一个局部变量，并用prop的值初始化它：
      Vue.component('test', {
         props : ['initialCounter'],
         data : function(){
             return {
                 counter : this.initialCounter
             }
-        }
+        },
+        template : "<span>{{initialCounter}}</span>"
+     })
+     // 2、定义一个计算属性，处理prop的值并返回。
+     Vue.component('test1',{
+        props : ['size'],
+        computed : {
+            normalizedSize : function(){
+              console.log(this.size.trim().toLowerCase());
+                return this.size.trim().toLowerCase();//报错？
+            }
+        },
+        template : '<span @click="normalizedSize">{{size}}</span>' 
      })
       var vm = new Vue({
           el : '#app',
           data : {
-
+              size : 'LOVE',
+              counter : 123
           },
           methods : {
             

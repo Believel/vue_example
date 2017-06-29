@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>过渡效果</title>
+  <style>
+      .fade-enter-active,.fade-leave-active {
+          transition: opacity .5s;
+      }
+      .fade-enter, .fade-leave-to{
+          opacity: 0;
+      }
+  </style>
+</head>
+<body>
+  <div id="app">
+      <button @click="show=!show">Toggle</button>
+      <!-- 对于在enter/leave过渡中切换的类名，v-是这些类名的前缀。使用<transition name="my-transition">可以重置前缀，比如v-enter替换成my-transition-enter -->
+      <transition name="fade">
+          <p v-if="show">hello</p>
+      </transition>  
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+  // Vue提供了transition的封装组件，在下列情形中，可以给任何元素和组件添加entering/leaving过渡
+  //  1、条件渲染(使用v-if)
+  //  2、条件展示(使用v-show)
+  //  3、动态组件
+  //  4、组件根节点
+  //  
+      var vm = new Vue({
+          el : '#app',
+          data : {
+              show: true
+          },
+          methods : {
+            
+          }
+      })
+  </script>
+</body>
+</html>

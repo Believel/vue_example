@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>深入响应式原理</title>
+</head>
+<body>
+  <div id="app">
+      
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+      var vm = new Vue({
+          el : '#app',
+          data : {
+              a : 1
+          },
+          methods : {
+            
+          }
+      })
+
+      // vm.a是响应的
+     vm.b = 2;
+     // vm.b = 2;是非响应的
+     // Vue不允许在已经创建的实例上动态添加新的根级响应式属性，可以使用
+     Vue.set(vm.someObject, 'b', 2);
+
+     // 如果你想在已有对象上添加一些属性，可以使用Object.assign()和_.extend()方法来添加属性
+     this.someObject = Object.assign({}, this.someObject, {a:1, b:2});
+
+
+      var obj = {};
+      var descriptor = Object.create(null);
+      descriptor.value = 'static';
+      Object.defineProperty(obj, 'key', descriptor);
+      // console.log(obj);
+      
+       Object.defineProperty(obj, 'name', {
+          enumerable : false,
+          configurable : false,
+          writable : false,//是否可以修改
+          value : 'zpp'
+       });
+      obj.name = 'jjdskd'
+       console.log(obj);
+
+
+  </script>
+</body>
+</html>

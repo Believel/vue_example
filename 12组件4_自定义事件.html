@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>prop验证-自定义事件</title>
+</head>
+<body>
+  <div id="app">
+      <p>{{total}}</p>
+      <button-counter @increment="incrementTotal"></button-counter>
+
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+  // 如果子组件要把数据传递回去，应该使用自定义事件
+  // 使用v-on绑定自定义事件
+  // 每个Vue实例都实现了事件接口(Events interface),即：
+  // $on(eventName)监听事件
+  // $emit(eventName)触发事件
+     Vue.component('button-counter', {
+        template : '<button @click="increment">{{counter}}</button>',
+        data : function(){
+            return {
+              counter : 0
+            }
+        },
+        methods : {
+            increment : function(){
+                this.counter += 1;
+                this.$emit('increment');
+            }
+        }
+     })
+      var vm = new Vue({
+          el : '#app',
+          data : {
+              total : 0
+          },
+          methods : {
+              incrementTotal : function(){
+                  this.total +=1;
+              } 
+          }
+      })
+
+      // 非父子组件通信
+      // 有时候两个组件也需要通信(非父子关系)，在简单的场景下，可以使用一个空的Vue实例作为中央事件总裁
+      var bus = new Vue();
+      //触发组件A中的事件
+      bus.$emit('id-select',1);
+      // 在组件B创建的钩子中监听事件
+      bus.$on('id-select', function(id){
+          console.log(id);
+      })
+
+  </script>
+</body>
+</html>

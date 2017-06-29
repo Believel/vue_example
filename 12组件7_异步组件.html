@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>异步组件</title>
+</head>
+<body>
+  <div id="app">
+      <async-example></async-example>
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+  // vue.js允许将组件定义为一个工厂函数，动态地解析组件的定义。vue.js只在组件需要渲染时触发工厂函数，并且把结果缓存起来，用于后面的再次渲染
+  
+  Vue.component('async-example', function(resolve, reject){
+      setTimeout(function(){
+          resolve({
+            template : '<div>I am async !</div>'
+          })
+      }, 1000)
+  })
+      var vm = new Vue({
+          el : '#app',
+          data : {
+
+          },
+          methods : {
+            
+          }
+      })
+  </script>
+</body>
+</html>

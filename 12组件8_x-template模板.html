@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>x-template模板</title>
+</head>
+<body>
+  <div id="app">
+      <hello-world></hello-world>
+  </div>
+  <script type="text/x-template" id="hello-world-template">
+      <p>hello world template</p>
+  </script>
+  <script src="js/vue.js"></script>
+  <script>
+      Vue.component('hello-world',  {
+          template :'#hello-world-template'
+      })
+      // 对低开销的静态组件使用v-once
+      // 尽管在Vue中渲染HTML很快，不过当组件中包含大量静态内容时，可以考虑使用v-once将渲染结果缓存起来，将想下面这样：
+      Vue.component('static', {
+          template : `\
+                    <div v-once>\
+                        <h1>dsaddeawsssssss</h1>
+                    </div>`
+      })
+      var vm = new Vue({
+          el : '#app',
+          data : {
+
+          },
+          methods : {
+            
+          }
+      })
+  </script>
+</body>
+</html>

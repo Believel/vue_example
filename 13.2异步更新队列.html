@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>异步更新队列</title>
+</head>
+<body>
+  <div id="app">
+      {{name}}
+
+      <example ></example>
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+  // 在组件内使用vm.$nextTick()实例方法特别方便
+  Vue.component('example', {
+      template : '<span @click="updateMessage">{{message}}</span>',
+      data : function(){
+          return {
+            message : '没有更新'
+          }
+      },
+      methods : {
+        updateMessage : function(){
+            this.message = '更新完成';
+            console.log(this.$el.textContent);//没有更新
+            this.$nextTick(function(){
+                console.log(this.$el.textContent);//更新完成
+            })
+        }
+      }
+  })
+      var vm = new Vue({
+          el : '#app',
+          data : {
+              name : '123'
+          },
+          methods : {
+            
+          }
+      })
+      vm.name = 'new message';//更新数据
+      console.log(vm.$el.textContent);//false
+      Vue.nextTick(function(){
+        console.log(vm.$el.textContent);//true   ?????
+      })
+  </script>
+</body>
+</html>

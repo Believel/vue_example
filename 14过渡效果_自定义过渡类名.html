@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>自定义过渡类名</title>
+  <link rel="stylesheet" href="css/animate.css">
+</head>
+<body>
+  <div id="app">
+      <button @click="show=!show">Toggle render</button>
+      <transition
+        name="custom-classes-transition"
+        enter-active-class="animated tada"
+        leave-active-class="animated bounceOutRight">
+          <p v-if="show">hello</p>
+      </transition>
+
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+  // 我们可以通过以下特性来自定义过渡类名,一般可以与animate.css结合
+  // enter-class
+  // enter-active-class
+  // leave-class
+  // leave-active-class
+      var vm = new Vue({
+          el : '#app',
+          data : {
+              show : true
+          },
+          methods : {
+            
+          }
+      })
+  </script>
+</body>
+</html>

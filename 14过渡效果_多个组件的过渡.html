@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>多个组件的过渡</title>
+  <style>
+      .component-fade-enter-active,.component-fade-leave-active {
+          transition: opacity .3s ease;
+      }
+      .component-fade-enter, .component-fade-leave-active{
+          opacity: 0;
+      }
+  </style>
+</head>
+<body>
+  <div id="app">
+      <input type="radio" value="v-a" id="a" v-model="view"><label for="a">A</label>
+      <input type="radio" value="v-b" id="b" v-model="view"><label for="b">B</label>
+      <!-- <transition>只能用于单个元素   <transition-group>可以用在多个列表中-->
+      <transition name="component-fade" mode="out-in">
+          <component :is="view"></component>
+      </transition>
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+     // 使用动态组件
+      var vm = new Vue({
+          el : '#app',
+          data : {
+              view: 'v-a'
+          },
+          components : {
+              'v-a' : {
+                  template : '<div>Component A</div>'
+              },
+              'v-b' : {
+                  template : '<div>Component B</div>'
+              }
+          },
+          methods : {
+            
+          }
+      })
+  </script>
+</body>
+</html>

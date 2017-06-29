@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>列表过渡</title>
+  <style>
+      .list-item {
+        display: inline-block;
+        margin-right: 10px;
+      }
+      .list-enter-active, .list-leave-active {
+        transition: all 1s;
+      }
+      .list-enter, .list-leave-active {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+  </style>
+</head>
+<body>
+  <div id="app">
+      <button @click="add">Add</button>
+      <button @click="remove">Remove</button>
+      <transition-group name="list" tag="p">
+          <span v-for="item in items" :key="item" class="list-item">
+              {{item}}
+          </span>
+      </transition-group>
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+  // 1、不同于 <transition>， 它会以一个真实元素呈现：默认为一个 <span>。你也可以通过 tag 特性更换为其他元素。
+  // 2、内部元素 总是需要 提供唯一的 key 属性值
+      var vm = new Vue({
+          el : '#app',
+          data : {
+              items : [1,2 ,3,4,5,6,7,8,9],
+              nextNum:10
+          },
+          methods : {
+              randomIndex : function(){
+                  return Math.floor(Math.random()*this.items.length);
+              },
+              add : function(){
+                  this.items.splice(this.randomIndex(), 0, this.nextNum++)
+                  // 参数：删除索引位置; 要删除的个数; 要添加的项目内容（可以为多个或者没有）
+              },
+              remove : function(){
+                  this.items.splice(this.randomIndex(), 1);//
+              }
+          }
+      })
+  </script>
+</body>
+</html>

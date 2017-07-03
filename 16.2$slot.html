@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>列表的位移过渡</title>
+  <title>$slot</title>
 </head>
 <body>
   <div id="app">
@@ -10,6 +10,10 @@
   </div>
   <script src="js/vue.js"></script>
   <script>
+  // 只读，用来访问被slot分发的内容。每个具名slot有其相应的属性
+  // default属性包括了所有没有被包含在具名slot中的节点
+  // 
+  // 在使用render函数书写一个组件时，访问vm.$slots最有帮助。
       var vm = new Vue({
           el : '#app',
           data : {

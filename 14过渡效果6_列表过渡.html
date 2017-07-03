@@ -4,21 +4,25 @@
   <meta charset="UTF-8">
   <title>列表过渡</title>
   <style>
+  /*需要注意的是使用 FLIP 过渡的元素不能设置为 display: inline */
       .list-item {
+        transition: all 1s;
         display: inline-block;
         margin-right: 10px;
       }
       .list-enter-active, .list-leave-active {
-        transition: all 1s;
-      }
-      .list-enter, .list-leave-active {
         opacity: 0;
         transform: translateY(30px);
       }
+      .list-leave-active {
+        position: absolute;
+      }
+    
   </style>
 </head>
 <body>
   <div id="app">
+      <button @click="shuffle">shuffle</button>
       <button @click="add">Add</button>
       <button @click="remove">Remove</button>
       <transition-group name="list" tag="p">
@@ -28,6 +32,7 @@
       </transition-group>
   </div>
   <script src="js/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
   <script>
   // 1、不同于 <transition>， 它会以一个真实元素呈现：默认为一个 <span>。你也可以通过 tag 特性更换为其他元素。
   // 2、内部元素 总是需要 提供唯一的 key 属性值
@@ -47,6 +52,9 @@
               },
               remove : function(){
                   this.items.splice(this.randomIndex(), 1);//
+              },
+              shuffle : function(){
+                  this.items = _.shuffle(this.items)
               }
           }
       })

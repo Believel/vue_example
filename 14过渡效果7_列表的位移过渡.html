@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>列表的位移过渡</title>
+   <style>
+      .flip-list-move {
+          transition: transform 1s;
+      }
+  </style>
+
+
+</head>
+<body>
+  <div id="app">
+      <button @click="shuffle">Shuffle</button>
+      <transition-group name="flip-list" tag="ul">
+          <li v-for="item in items" :key="item">
+            {{item}}
+          </li>
+      </transition-group>
+  </div>
+  <script src="js/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+  <script>
+  // <transition-group>组件有一个特殊之处，不仅可以进入和离开动画，还可以改变定位
+  // v-move特性
+      var vm = new Vue({
+          el : '#app',
+          data : {
+              items : [1,2,3,4,5,6,7,8,9]
+          },
+          methods : {
+              shuffle : function(){
+                  this.items = _.shuffle(this.items)
+              }
+          }
+      })
+  </script>
+</body>
+</html>

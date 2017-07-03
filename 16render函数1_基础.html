@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>render函数_基础</title>
+</head>
+<body>
+<!-- Vue推荐在绝大多数情况下使用template来创建你的html.然而在一些创景中，你真的需要javascript的完全编程的能力，这就是render函数，它比template更接近编译器 -->
+  <div id="app">
+      <h1>
+        <a href="#hello-world" name="hello-world">
+          hello world!
+        </a>
+      </h1>
+      <anchored-heading :level="1">Hello world!</anchored-heading>
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+     Vue.component('anchored-heading', {
+        render : function(createElement){
+            return createElement(
+              'h'+ this.level,      // tag name标签名称
+              this.$slots.default   //子组件中的阵列
+              )
+        },
+        props : {
+          level : {
+            type : Number,
+            required : true
+          }
+        }
+     })
+      var vm = new Vue({
+          el : '#app',
+          data : {
+
+          },
+          methods : {
+            
+          }
+      })
+  </script>
+</body>
+</html>

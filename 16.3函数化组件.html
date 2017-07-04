@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>函数化组件</title>
+</head>
+<body>
+  <div id="app">
+      
+  </div>
+  <script src="js/vue.js"></script>
+  <script>
+  Vue.component('my-component', {
+    functional : true,//标记组件为functional,这就意味着它是无状态的(没有data),无实例(没有this上下文)
+
+    //为了弥补缺少的实例
+    //提供第二个参数作为上下文
+    render : function(createElement, context){
+        //...
+    },
+    props: {
+      //....
+    }
+  })
+      var vm = new Vue({
+          el : '#app',
+          data : {
+
+          },
+          methods : {
+            
+          }
+      })
+  </script>
+</body>
+</html>

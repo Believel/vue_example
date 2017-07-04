@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>钩子函数</title>
+</head>
+<body>
+  <div id="app" >
+      <div v-demo:hello.a.b="message"></div>
+      <!-- 对象字面量 -->
+      <div v-example="{color :'white', text : 'hello'}"></div>
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+  Vue.directive('example', function(el, binding){
+    console.log(binding.value.color);
+    console.log(binding.value.text);
+  })
+  Vue.directive('demo', {
+      bind : function(el, binding, vnode){
+        var s = JSON.stringify
+        el.innerHTML = 
+         'name:' + s(binding.name) + '<br>' +
+         'value:' + s(binding.value) + '<br>'+
+         'expression:'+s(binding.expression)+'<br>'+
+         'argument:' +s(binding.arg) + '<br>'+
+         'modifiers:'+s(binding.modifiers) +'<br>'+
+         'vnode keys'+Object.keys(vnode).join(', ')
+      }
+  })
+      var vm = new Vue({
+          el : '#app',
+          data : {
+              message : 'hello'
+          },
+          methods : {
+            
+          }
+      })
+  </script>
+</body>
+</html>

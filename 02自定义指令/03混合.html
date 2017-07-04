@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>混合</title>
+</head>
+<body>
+  <div id="app">
+      
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+  // 混合是一种灵活的分布式复用Vue组件的方式。混合对象可以包含任意组件选项。以组件使用混合对象时，所有混合对象的选项将被混入该组件本身的选项。
+  // 
+  // 定义一个混合对象
+  var myMixin = {
+      created : function(){
+        this.hello()
+      },
+      methods : {
+        hello : function(){
+          console.log('hello from minxin')
+        }
+      }
+  }
+  // 定义一个使用混合对象的组件
+  var Component = Vue.extend({
+      mixins : [myMixin]
+  })
+  var component = new Component();
+  // console.log(component)
+      var vm = new Vue({
+          el : '#app',
+          data : {
+
+          },
+          methods : {
+            
+          }
+      })
+  </script>
+</body>
+</html>

@@ -18,6 +18,7 @@
   <script>
      Vue.component('anchored-heading', {
         render : function(createElement){
+          console.log(this.$slots.default);//获取所有Vnodes列表中的所有静态内容
             return createElement(
               'h'+ this.level,      // tag name标签名称
               this.$slots.default   //子组件中的阵列

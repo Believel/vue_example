@@ -1,0 +1,19 @@
+<script type="text/ng-template" id="ngViews.html">
+	<div class="lyrow" ng-drag="true" ng-drag-data="data" ng-repeat="i in lists" >
+	<a href="#close" class="remove label label-danger">
+		<i class="glyphicon-remove glyphicon"></i> 删除
+	</a>
+	<span class="drag label label-default" >
+		<i class="glyphicon glyphicon-move"></i> 拖动
+	</span>
+	<div class="preview">
+		<input type="text" value={{i.name}} class="form-control">
+	</div>
+	<div class="view" >
+		<div class="row clearfix">
+			<div ng-repeat="j in i.count" class={{j.num}}></div>
+		</div>
+	</div>
+</div>
+
+</script>

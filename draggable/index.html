@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="language" content="en" />
+	<link href="skin/css/bootstrap.min.css" rel="stylesheet">
+	<link href="skin/css/layoutit.css" rel="stylesheet">
+	<link href="skin/css/default.css" rel="stylesheet">
+	<link href="skin/css/base.css" rel="stylesheet">
+	<link href="skin/css/list.css" rel="stylesheet">
+	<link href="skin/css/content.css" rel="stylesheet">
+
+	<script type="text/javascript" src="skin/js/angular.min.js"></script>
+	<script type="text/javascript" src="skin/js/jquery.min.js"></script>
+	<script type="text/javascript" src="skin/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="skin/js/ngDraggable.js"></script>
+	<script type="text/javascript" src="scripts/index.js"></script>
+	<script type="text/javascript" src="directive/drafting.js"></script>
+</head>
+	<body class="edit" ng-app="app">
+		<div class="container" ng-controller="tzCtrl">
+			<div class="row">
+				<div class="">
+					<div class="sidebar-nav">
+						<ul class="nav nav-list accordion-group">
+							<li class="nav-header" >
+								<i class="glyphicon-plus glyphicon"></i>  布局设置
+								<div class="pull-right popover-info">
+									<i class="glyphicon glyphicon-question-sign"></i>
+								  	<div class="popover fade right">
+								  		<div class="arrow"></div>
+								 		<h3 class="popover-title">提示：</h3>
+								 		<div class="popover-content">在这里设置网站的布局, 包含多种排版形式，可任意组合多种不同的排版布局风格。 </div>
+								  	</div> </div>
+							</li>
+							<li class="rows tzLi" >
+								<div class="lyrow" ng-drag="true" ng-drag-data="i" ng-repeat="i in lists" class={{i.className}}>
+									<a href="#close" class="remove label label-danger" ng-click="moveElement($event)">
+										<i class="glyphicon-remove glyphicon"></i> 删除
+									</a>
+									<span class="drag label label-default" >
+										<i class="glyphicon glyphicon-move"></i> 拖动
+									</span>
+									<div class="preview">
+										<input type="text" value={{i.name}} class="form-control">
+									</div>
+									<div class="view" >
+										<div class="row clearfix">
+											<div ng-repeat="j in i.count" class={{j.num}}></div>
+										</div>
+									</div>
+								</div>
+							</li>
+							<li class="boxes" id="elmComponents" style="display: list-item;">
+								<div class="box box-element ui-draggable"  ng-drag="true" ng-drag-data="item" ng-repeat="item in listImg">
+									<a href="#close" class="remove label label-danger">
+										<i class="glyphicon glyphicon-remove"></i> 删除
+									</a>
+									<span class="drag label label-default ui-draggable-handle">
+										<i class="glyphicon glyphicon-move"></i> 拖动
+									</span>
+									<div class="preview">{{item.name}}</div>
+									<div class="view" id="textFrame">
+										<form role="form">
+											<div class="form-group">
+												<label for="name"></label>
+												<input type="text" class="form-control pwd click text" id="textBox" placeholder="请输入名称" ng-model="ppp">
+												<div class="col-xs-12 promptMessage" id="messageHide" style="display: none; color: red;">*只能输入长度为6~10位的字母或数字</div>
+											</div>
+										</form>
+									</div>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<!--内容区域 开始-->
+				<div class="demo" ng-drop="true" ng-drop-success='dropElement($data,$event,$index)' ng-mouseenter="mouse($event,k,item.count,$index)" style="min-height: 500px; " ng-a>
+					<!--<ng-a></ng-a>-->
+				</div>
+			</div>
+	 	</div>
+	</body>
+</html>

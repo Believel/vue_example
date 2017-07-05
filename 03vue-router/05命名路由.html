@@ -6,13 +6,13 @@
 </head>
 <body>
   <div id="app">
-      
+      <router-link :to="{name:'user'}">User</router-link>
   </div>
   <script src="../js/vue.js"></script>
   <script src="../js/vue-router.js"></script>
   <script>
     const User = {
-       template : '<div>User</div>'
+       template : '<div>this is user</div>'
     }
     const router = new VueRouter({
         routes : [
@@ -22,7 +22,7 @@
             component : User
           }
         ]
-    })
+    }) 
       var vm = new Vue({
         router
       }).$mount("#app")

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>命名路由</title>
+</head>
+<body>
+  <div id="app">
+      
+  </div>
+  <script src="../js/vue.js"></script>
+  <script src="../js/vue-router.js"></script>
+  <script>
+    const User = {
+       template : '<div>User</div>'
+    }
+    const router = new VueRouter({
+        routes : [
+          {
+            path : '/user',
+            name : 'user',
+            component : User
+          }
+        ]
+    })
+      var vm = new Vue({
+        router
+      }).$mount("#app")
+  </script>
+</body>
+</html>

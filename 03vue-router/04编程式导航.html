@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>编程式导航</title>
+</head>
+<body>
+  <div id="app">
+      
+  </div>
+   <script src="../js/vue.js"></script>
+   <script src="../js/vue-router.js"></script>
+  <script>
+     // router.push(location) 导航到不同的URL    跟 window.history.pushState
+     // 1.传参——字符串
+     // router.push('home')
+     // 2、传参——对象
+     // router.push({path: 'home'})
+     // 命名的路由
+     // router.push({name:'user', params:{userId : 123}})
+     // 带参数的编程/register?plan=private
+     // 
+     // router.push({path:'register', query : {plan:'private'}})
+     // 
+     // 2、router.replace(location)      window.history.replaceState
+     // 他不会向history添加新记录，而是跟它的方法名一样————替换掉当前的history记录
+     // 
+     // 3、router.go(n)                  window.history.go
+     // 这个方法的参数是一个整数，意思是在history记录中向前或者后退多少不
+      var vm = new Vue({
+          el : '#app',
+          data : {
+
+          },
+          methods : {
+            
+          }
+      })
+  </script>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>嵌套路由</title>
+</head>
+<body>
+  <div id="app">
+  <!-- 最顶层的出口，渲染最高级路由匹配到的组件。
+   同样的，一个呗渲染组件同样可以包含自己的 嵌套
+   <router-view> -->
+     <router-link to="/user/foo">/user/foo</router-link>
+      <router-view></router-view>
+  </div>
+    <script src="../js/vue.js"></script>
+    <script src="../js/vue-router.js"></script>
+  <script>
+      const User = {
+          template : `<div class="user">
+                      <h2>User {{$route.params.id}}</h2>
+                      <router-link to="/user/foo/profile">/user/foo/profile</router-link>
+                      <router-link to="/user/foo/posts">/user/foo/posts</router-link>
+                      <router-view></router-view>
+                      </div>`
+      }
+      const UserProfile = {
+          template : '<h1>userProfile</h1>'
+      }
+      const UserPosts = {
+        template : '<h1>userPosts</h1>'
+      }
+      // 要在嵌套的出口中渲染组件，需要在VueRouter的参数总使用children配置
+      const router = new VueRouter({
+          routes : [
+              {
+                path : '/user/:id',
+                component:User,
+                children:[
+                   // {
+                   //    path :'',
+                   //    component :User
+
+                   // },
+                    {
+                      // 当/user/:id/profile匹配成功，
+                      // Userprofile会被渲染在User的<router-view>中
+                      path : 'profile',
+                      component : UserProfile
+                    },
+                    {
+                      path : 'posts',
+                      component : UserPosts
+                    }
+                ]}
+          ]
+      })
+      var vm = new Vue({
+         router
+      }).$mount('#app')
+  </script>
+</body>
+</html>

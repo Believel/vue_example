@@ -6,29 +6,37 @@
 </head>
 <body>
   <div id="app">
-      
+      <p>
+        <router-link to="/user/foo">/user/foo</router-link>
+        <router-link to="/user/bar">/user/bar</router-link>
+      </p>
+      <router-view></router-view>
   </div>
   <script src="../js/vue.js"></script>
   <script src="../js/vue-router.js"></script>
   <script>
   // dynamic segment 动态路径参数
   const User = {
-    template : '<div>User</div>'
+    template : '<div>User {{$route.params.id}}</div>',
+    // 响应路由参数变化
+    watch : {
+        '$route'(to, from){
+            //对路由变化做出响应
+            console.log(to);
+            console.log(from)
+        }
+    }
   }
   const router = new VueRouter({
       routes : [
         // 动态路径参数    以冒号开头
+        // 参数值会被设置到this.$route.params,可以在每个组件内使用
+        {path :'/user/:id', component : User}
       ]
   })
       var vm = new Vue({
-          el : '#app',
-          data : {
-
-          },
-          methods : {
-            
-          }
-      })
+          router
+      }).$mount('#app')
   </script>
 </body>
 </html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>命名视图</title>
+</head>
+<body>
+  <div id="app">
+      <h1>Name Views</h1>
+      <ul>
+          <li>
+              <router-link to="/">/</router-link>
+          </li>
+          <li>
+              <router-link to="/other">/other</router-link>
+          </li>
+      </ul>
+      <router-view class="view one"></router-view>
+      <router-view class="view two" name="a"></router-view>
+      <router-view class="view three" name="b"></router-view>
+  </div>
+ <script src="../js/vue.js"></script>
+ <script src="../js/vue-router.js"></script>
+<script>
+     const Foo = {template : '<div>foo</div>'}
+     const Bar = {template : '<div>Bar</div>'}
+     const Baz = {template : '<div>Baz</div>'}
+     const router = new VueRouter({
+        // mode : 'history',
+        routes : [
+          {
+            path : '/',
+            components :{
+              default :Foo,
+              a :Bar,
+              b: Baz
+            }
+          },
+          {
+            path : '/other',
+            components : {
+              default :Baz,
+              a :Bar,
+              b :Foo
+            }
+          }
+        ]
+     })
+      var vm = new Vue({
+          router
+      }).$mount('#app')
+  </script>
+</body>
+</html>

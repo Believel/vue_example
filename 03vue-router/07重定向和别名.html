@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>重定向和别名</title>
+</head>
+<body>
+  <div id="app">
+      
+  </div>
+  <script src="../js/vue.js"></script>
+ <script src="../js/vue-router.js"></script>
+  <script>
+  // 重定向也是通过routes配置来完成的，下面的例子是从/a重定向到/b
+  const router = new VueRouter({
+      routes : [
+        {path :'/a', redirect:'/b', alias:'/b'}
+      ]
+  })
+      var vm = new Vue({
+          el : '#app',
+          data : {
+
+          },
+          methods : {
+            
+          }
+      })
+    
+  </script>
+</body>
+</html>

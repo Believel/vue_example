@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>nextTick</title>
+</head>
+<body>
+  <div id="app">
+      {{msg}}
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+  // Vue.nextTick()
+  // 在下次DOM更新循环结束之后执行延迟回调。在修改数据之后立即使用这个方法，获取更新后的DOM
+      var vm = new Vue({
+          el : '#app',
+          data : {
+            msg : 'hello'
+          },
+          methods : {
+            
+          }
+      })
+      vm.msg = 'www';
+      console.log("DOM 还没有更新");
+      Vue.nextTick(function () {
+        console.log("DOM 更新了");
+      })
+  </script>
+</body>
+</html>

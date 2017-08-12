@@ -6,14 +6,19 @@
 </head>
 <body>
   <div id="app">
-      
+      <p>{{message}}</p>
   </div>
   <script src="js/vue.js"></script>
   <script>
       var vm = new Vue({
           el : '#app',
           data : {
-            a : 1
+            a : 1,
+            message : 'hahahaha'
+          },
+          beforeCreate: function(){
+            console.group('beforeCreate 创建前的状态===============');
+            
           },
           //在实例被创建之后被调用
           created : function(){

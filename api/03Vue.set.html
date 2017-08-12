@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.set()</title>
+</head>
+<body>
+  <div id="app">
+      
+  </div>
+  <script src="../js/vue.js"></script>
+  <script>
+      var vm = new Vue({
+          el : '#app',
+          data : {
+            obj : {
+              name: 'zpp',
+              age: 23
+            }
+          },
+          methods : {
+            
+          }
+      })
+      // 设置对象的属性。如果对象是响应式的，确保属性被创建后也是响应式的，同时触发视图更新。
+      Vue.set(vm.obj, 'score', 99);//返回值：设置的值
+      console.log(Vue.set(vm.obj, 'score', 99));//返回值：设置的值
+      console.log(vm.obj);
+
+
+  </script>
+</body>
+</html>
